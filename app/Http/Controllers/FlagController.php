@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Http\Requests\FlagRequest;
 use App\Http\Resources\Flag\FlagCollection;
 use App\Http\Resources\Flag\FlagDetail;
+use App\Http\Searches\FlagSearch;
 use App\Http\Services\Flag\FlagService;
 use App\Models\Flag;
 use Illuminate\Http\Request;
@@ -30,11 +31,12 @@ class FlagController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(Request $request)
     {
-        $result = $this->flagService->all();
+        $factory = app()->make(FlagSearch::class);
+        $flags = $factory->apply()->paginate($request->per_page);
 
-        return new FlagCollection($result);
+        return new FlagCollection($flags);
     }
 
     /**
