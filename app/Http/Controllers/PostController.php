@@ -6,6 +6,7 @@ use App\Http\Requests\Post\CreatePostRequest;
 use App\Http\Requests\Post\UpdatePostRequest;
 use App\Http\Resources\Post\PostCollection;
 use App\Http\Resources\Post\PostDetail;
+use App\Http\Searches\PostSearch;
 use App\Http\Services\Post\PostService;
 use App\Http\Traits\ErrorFixer;
 use App\Models\Post;
@@ -37,7 +38,8 @@ class PostController extends Controller
      */
     public function index(Request $request)
     {
-        $posts = $this->postService->httpSearch($request);
+        $factory = app()->make(PostSearch::class);
+        $posts = $factory->apply()->paginate($request->per_page);
 
         return new PostCollection($posts);
     }

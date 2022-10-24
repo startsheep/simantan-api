@@ -24,11 +24,6 @@ class PostServiceImplement extends Service implements PostService
         $this->mainRepository = $mainRepository;
     }
 
-    public function httpSearch(Request $request)
-    {
-        return $this->mainRepository->httpSearch($request);
-    }
-
     public function create($attributes)
     {
         if ($attributes['user_id'] == null) {

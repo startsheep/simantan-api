@@ -7,5 +7,4 @@ use LaravelEasyRepository\BaseService;
 
 interface PostService extends BaseService
 {
-    public function httpSearch(Request $request);
 }
