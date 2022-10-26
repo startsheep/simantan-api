@@ -32,11 +32,18 @@ class LoginRequest extends FormRequest
         ];
     }
 
+    /**
+     * Fill the model with an array of attributes.
+     *
+     * @param  \Illuminate\Contracts\Validation\Validator  $validator
+     *
+     * @throws \Illuminate\Validation\ValidationException
+     */
     protected function failedValidation(Validator $validator)
     {
         $response = new JsonResponse([
             'meta' => [
-                'message' => $validator->errors(),
+                'messages' => $validator->errors(),
                 'status_code' => 400
             ]
         ], 400);
