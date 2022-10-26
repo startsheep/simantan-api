@@ -1,13 +1,13 @@
 <?php
 
-namespace App\Http\Requests\Post;
+namespace App\Http\Requests\Comment;
 
 use Illuminate\Contracts\Validation\Validator;
 use Illuminate\Foundation\Http\FormRequest;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Validation\ValidationException;
 
-class CreatePostRequest extends FormRequest
+class CreateCommentRequest extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
@@ -27,9 +27,9 @@ class CreatePostRequest extends FormRequest
     public function rules()
     {
         return [
-            'image' => 'required|file|image|mimes:png,jpg,jpeg',
-            'description' => 'required',
-            'flag_id' => 'exists:flags,id|required'
+            'user_id' => 'exists:users,id|required',
+            'post_id' => 'exists:posts,id|required',
+            'message' => 'required'
         ];
     }
 

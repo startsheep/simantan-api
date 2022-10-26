@@ -36,7 +36,7 @@ class PostServiceImplement extends Service implements PostService
             }
         }
 
-        $post = $this->mainRepository->create($attributes);
+        $post = parent::create($attributes);
 
         return response()->json([
             'message' => 'post has added!',
@@ -47,7 +47,7 @@ class PostServiceImplement extends Service implements PostService
 
     public function update($id, $attributes)
     {
-        $post = $this->mainRepository->findOrFail($id);
+        $post = parent::findOrFail($id);
 
         if (isset($attributes['image'])) {
             if (isset($attributes['image']) && $attributes['image']) {
@@ -69,7 +69,7 @@ class PostServiceImplement extends Service implements PostService
 
     public function delete($id)
     {
-        $post = $this->mainRepository->findOrFail($id);
+        $post = parent::findOrFail($id);
 
         if ($post->image != null) {
             Storage::delete($post->image);

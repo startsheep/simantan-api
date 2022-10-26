@@ -17,6 +17,11 @@ class Post extends Model
         'user_id'
     ];
 
+    public function getImageAttribute($image)
+    {
+        return $this->attributes['image'] = url('storage/' . $image);
+    }
+
     public function user(): BelongsTo
     {
         return $this->belongsTo(User::class);

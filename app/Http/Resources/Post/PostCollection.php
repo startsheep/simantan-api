@@ -19,7 +19,7 @@ class PostCollection extends ResourceCollection
         foreach ($this as $post) {
             $result[] = [
                 "id" => $post->id,
-                "image" => url('storage/' . $post->image),
+                "image" => $post->image,
                 "description" => $post->description,
                 "flag" => $post->flag,
                 "user" => $post->user,

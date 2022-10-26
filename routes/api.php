@@ -19,3 +19,12 @@ includeRouteFiles(__DIR__ . '/api');
 Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
     return $request->user();
 });
+
+Route::middleware(['auth:sanctum'])->group(function () {
+    Route::get('user/regenerate', function () {
+        $user = auth()->user();
+        $role = strtolower($user->role->name);
+        $token = $user->createToken('api', [$role]);
+        dd($token->plainTextToken);
+    });
+});

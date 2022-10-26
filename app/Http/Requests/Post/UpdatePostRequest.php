@@ -36,7 +36,7 @@ class UpdatePostRequest extends FormRequest
     /**
      * Fill the model with an array of attributes.
      *
-     * @param  Validator  $validator
+     * @param  \Illuminate\Contracts\Validation\Validator  $validator
      *
      * @throws \Illuminate\Validation\ValidationException
      */
