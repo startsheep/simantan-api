@@ -3,15 +3,13 @@
 namespace App\Http\Services\Post;
 
 use App\Http\Repositories\Post\PostRepository;
-use App\Http\Traits\FIllableFixer;
+use Illuminate\Http\Request;
 use Illuminate\Http\Response;
 use Illuminate\Support\Facades\Storage;
 use LaravelEasyRepository\Service;
 
 class PostServiceImplement extends Service implements PostService
 {
-    use FIllableFixer;
-
     /**
      * don't change $this->mainRepository variable name
      * because used in extends service class
