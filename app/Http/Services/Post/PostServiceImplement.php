@@ -2,12 +2,11 @@
 
 namespace App\Http\Services\Post;
 
-use LaravelEasyRepository\Service;
 use App\Http\Repositories\Post\PostRepository;
 use Illuminate\Http\Request;
 use Illuminate\Http\Response;
-use Illuminate\Support\Str;
 use Illuminate\Support\Facades\Storage;
+use LaravelEasyRepository\Service;
 
 class PostServiceImplement extends Service implements PostService
 {
@@ -39,7 +38,7 @@ class PostServiceImplement extends Service implements PostService
         return response()->json([
             'message' => 'post has added!',
             'status' => 'success',
-            'data' => $post
+            'data' => $post,
         ], Response::HTTP_CREATED);
     }
 
@@ -61,7 +60,7 @@ class PostServiceImplement extends Service implements PostService
         return response()->json([
             'message' => 'post has updated!',
             'status' => 'success',
-            'data' => $post
+            'data' => $post,
         ], Response::HTTP_OK);
     }
 
@@ -78,7 +77,7 @@ class PostServiceImplement extends Service implements PostService
         return response()->json([
             'message' => 'post has deleted!',
             'status' => 'success',
-            'data' => $post
+            'data' => $post,
         ], Response::HTTP_OK);
     }
 }

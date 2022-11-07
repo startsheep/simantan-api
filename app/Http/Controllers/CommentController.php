@@ -9,7 +9,6 @@ use App\Http\Resources\Comment\CommentDetail;
 use App\Http\Searches\CommentSearch;
 use App\Http\Services\Comment\CommentService;
 use App\Http\Traits\ErrorFixer;
-use App\Models\Comment;
 use Exception;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
@@ -19,7 +18,7 @@ class CommentController extends Controller
     use ErrorFixer;
 
     /**
-     * @var $commentService
+     * @var
      */
     protected $commentService;
 
@@ -56,9 +55,11 @@ class CommentController extends Controller
 
         try {
             DB::commit();
+
             return $this->commentService->create($request->all());
         } catch (Exception $th) {
             DB::rollBack();
+
             return $this->createError();
         }
     }
@@ -89,9 +90,11 @@ class CommentController extends Controller
 
         try {
             DB::commit();
+
             return $this->commentService->update($id, $request->all());
         } catch (Exception $th) {
             DB::rollBack();
+
             return $this->updateError();
         }
     }

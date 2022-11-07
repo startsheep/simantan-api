@@ -4,11 +4,9 @@ namespace App\Http\Searches;
 
 use App\Http\Searches\Filters\Flag\Search;
 use App\Models\Flag;
-use Illuminate\Database\Eloquent\Model;
 
 class FlagSearch extends HttpSearch
 {
-
     protected function passable()
     {
         return Flag::query();
@@ -17,7 +15,7 @@ class FlagSearch extends HttpSearch
     protected function filters(): array
     {
         return [
-            Search::class
+            Search::class,
         ];
     }
 

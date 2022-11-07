@@ -5,11 +5,9 @@ namespace App\Http\Searches;
 use App\Http\Searches\Filters\Post\SearchByFlag;
 use App\Http\Searches\Filters\Post\SearchByUser;
 use App\Models\Post;
-use Illuminate\Database\Eloquent\Model;
 
 class PostSearch extends HttpSearch
 {
-
     protected function passable()
     {
         return Post::query();
@@ -19,7 +17,7 @@ class PostSearch extends HttpSearch
     {
         return [
             SearchByUser::class,
-            SearchByFlag::class
+            SearchByFlag::class,
         ];
     }
 

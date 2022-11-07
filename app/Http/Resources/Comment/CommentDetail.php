@@ -15,12 +15,12 @@ class CommentDetail extends JsonResource
     public function toArray($request)
     {
         $comment = [
-            "id" => $this->id,
-            "post" => $this->post,
-            "user" => $this->user,
-            "message" => $this->message,
-            "created_at" => $this->created_at,
-            "updated_at" => $this->updated_at
+            'id' => $this->id,
+            'post' => $this->post,
+            'user' => $this->user,
+            'message' => $this->message,
+            'created_at' => $this->created_at,
+            'updated_at' => $this->updated_at,
         ];
 
         return $comment;

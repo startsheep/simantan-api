@@ -18,12 +18,12 @@ class CommentCollection extends ResourceCollection
 
         foreach ($this as $comment) {
             $result[] = [
-                "id" => $comment->id,
-                "post" => $comment->post,
-                "user" => $comment->user,
-                "message" => $comment->message,
-                "created_at" => $comment->created_at,
-                "updated_at" => $comment->updated_at
+                'id' => $comment->id,
+                'post' => $comment->post,
+                'user' => $comment->user,
+                'message' => $comment->message,
+                'created_at' => $comment->created_at,
+                'updated_at' => $comment->updated_at,
             ];
         }
 

@@ -2,7 +2,6 @@
 
 namespace App\Http\Repositories\Post;
 
-use Illuminate\Http\Request;
 use LaravelEasyRepository\Repository;
 
 interface PostRepository extends Repository

@@ -2,29 +2,43 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Resources\Like\LikeCollection;
+use App\Http\Searches\LikeSearch;
+use App\Http\Services\Like\LikeService;
+use App\Http\Traits\ErrorFixer;
 use App\Models\Like;
+use Exception;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 
 class LikeController extends Controller
 {
+    use ErrorFixer;
+
+    /**
+     * @var
+     */
+    protected $likeService;
+
+    /**
+     * @param  LikeService  $likeService
+     */
+    public function __construct(LikeService $likeService)
+    {
+        $this->likeService = $likeService;
+    }
+
     /**
      * Display a listing of the resource.
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(Request $request)
     {
-        //
-    }
+        $factory = app()->make(LikeSearch::class);
+        $likes = $factory->apply()->paginate($request->per_page);
 
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function create()
-    {
-        //
+        return new LikeCollection($likes);
     }
 
     /**
@@ -33,53 +47,31 @@ class LikeController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function create(Request $request, $id)
     {
-        //
+        DB::beginTransaction();
+
+        try {
+            DB::commit();
+
+            return $this->likeService->update($id, $request->all());
+        } catch (Exception $e) {
+            DB::rollBack();
+
+            return $this->updateError();
+        }
     }
 
     /**
      * Display the specified resource.
      *
-     * @param  \App\Models\Like  $like
+     * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function show(Like $like)
+    public function show($id)
     {
-        //
-    }
+        $result = $this->likeService->findOrFail($id);
 
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  \App\Models\Like  $like
-     * @return \Illuminate\Http\Response
-     */
-    public function edit(Like $like)
-    {
-        //
-    }
-
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  \App\Models\Like  $like
-     * @return \Illuminate\Http\Response
-     */
-    public function update(Request $request, Like $like)
-    {
-        //
-    }
-
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param  \App\Models\Like  $like
-     * @return \Illuminate\Http\Response
-     */
-    public function destroy(Like $like)
-    {
-        //
+        return $result;
     }
 }

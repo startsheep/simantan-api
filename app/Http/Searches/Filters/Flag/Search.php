@@ -2,9 +2,9 @@
 
 namespace App\Http\Searches\Filters\Flag;
 
+use App\Http\Searches\Contracts\FilterContract;
 use Closure;
 use Illuminate\Database\Eloquent\Builder;
-use App\Http\Searches\Contracts\FilterContract;
 
 class Search implements FilterContract
 {
@@ -12,7 +12,7 @@ class Search implements FilterContract
     protected $search;
 
     /**
-     * @param string|null $search
+     * @param  string|null  $search
      * @return void
      */
     public function __construct($search)
@@ -25,10 +25,10 @@ class Search implements FilterContract
      */
     public function handle(Builder $query, Closure $next)
     {
-        if (!$this->keyword()) {
+        if (! $this->keyword()) {
             return $next($query);
         }
-        $query->where('name', 'LIKE', '%' . $this->search . '%');
+        $query->where('name', 'LIKE', '%'.$this->search.'%');
 
         return $next($query);
     }

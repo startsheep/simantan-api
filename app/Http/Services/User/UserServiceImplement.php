@@ -2,12 +2,11 @@
 
 namespace App\Http\Services\User;
 
-use LaravelEasyRepository\Service;
 use App\Http\Repositories\User\UserRepository;
+use LaravelEasyRepository\Service;
 
 class UserServiceImplement extends Service implements UserService
 {
-
     /**
      * don't change $this->mainRepository variable name
      * because used in extends service class

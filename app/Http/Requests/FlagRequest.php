@@ -27,7 +27,7 @@ class FlagRequest extends FormRequest
     public function rules()
     {
         $request = [
-            'name' => 'required'
+            'name' => 'required',
         ];
 
         if (empty(request('_method'))) {
@@ -49,8 +49,8 @@ class FlagRequest extends FormRequest
         $response = new JsonResponse([
             'meta' => [
                 'messages' => $validator->errors(),
-                'status_code' => 400
-            ]
+                'status_code' => 400,
+            ],
         ], 400);
 
         throw new ValidationException($validator, $response);

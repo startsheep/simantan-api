@@ -2,9 +2,9 @@
 
 namespace App\Http\Traits;
 
-use RuntimeException;
-use Illuminate\Support\Str;
 use Illuminate\Contracts\Container\Container as Laravel;
+use Illuminate\Support\Str;
+use RuntimeException;
 
 /**
  * BaseFoundation
@@ -38,14 +38,14 @@ trait BaseFoundation
     /**
      * change class to string to Builder Object
      *
-     * @param  class-string $currentClass
+     * @param  class-string  $currentClass
      * @return mixed
      */
     protected function resolveClassIdentification($currentClass)
     {
         $constructor = (new \ReflectionClass($currentClass))->getConstructor();
 
-        if (!$constructor) {
+        if (! $constructor) {
             return $currentClass;
         }
 
@@ -63,7 +63,7 @@ trait BaseFoundation
      */
     protected function getLaravel()
     {
-        if (!$this->laravel) {
+        if (! $this->laravel) {
             throw new RuntimeException('Laravel container instance has not been passed to the Pipeline.');
         }
 

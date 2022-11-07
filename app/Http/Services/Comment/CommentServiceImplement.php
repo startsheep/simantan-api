@@ -2,13 +2,12 @@
 
 namespace App\Http\Services\Comment;
 
-use LaravelEasyRepository\Service;
 use App\Http\Repositories\Comment\CommentRepository;
 use Illuminate\Http\Response;
+use LaravelEasyRepository\Service;
 
 class CommentServiceImplement extends Service implements CommentService
 {
-
     /**
      * don't change $this->mainRepository variable name
      * because used in extends service class
@@ -27,7 +26,7 @@ class CommentServiceImplement extends Service implements CommentService
         return response()->json([
             'message' => 'comment has added!',
             'status' => 'success',
-            'data' => $comment
+            'data' => $comment,
         ], Response::HTTP_CREATED);
     }
 
@@ -40,7 +39,7 @@ class CommentServiceImplement extends Service implements CommentService
         return response()->json([
             'message' => 'comment has updated!',
             'status' => 'success',
-            'data' => $comment
+            'data' => $comment,
         ], Response::HTTP_OK);
     }
 
@@ -53,7 +52,7 @@ class CommentServiceImplement extends Service implements CommentService
         return response()->json([
             'message' => 'post has deleted!',
             'status' => 'success',
-            'data' => $comment
+            'data' => $comment,
         ], Response::HTTP_OK);
     }
 }

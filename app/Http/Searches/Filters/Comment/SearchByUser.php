@@ -1,55 +1,56 @@
 <?php
+
 namespace App\Http\Searches\Filters\Comment;
 
+use App\Http\Searches\Contracts\FilterContract;
 use Closure;
 use Illuminate\Database\Eloquent\Builder;
-use App\Http\Searches\Contracts\FilterContract;
 
 class SearchByUser implements FilterContract
 {
-	/** @var string|null */
-	protected $searchByUser;
+    /** @var string|null */
+    protected $searchByUser;
 
-	/**
-	 * @param string|null $searchByUser
-	 * @return void
-	 */
-	public function __construct($searchByUser)
-	{
-		$this->searchByUser = $searchByUser;
-	}
+    /**
+     * @param  string|null  $searchByUser
+     * @return void
+     */
+    public function __construct($searchByUser)
+    {
+        $this->searchByUser = $searchByUser;
+    }
 
-	/**
-	 * @return mixed
-	 */
-	public function handle(Builder $query, Closure $next)
-	{
-		if (!$this->keyword()) {
-			return $next($query);
-		}
+    /**
+     * @return mixed
+     */
+    public function handle(Builder $query, Closure $next)
+    {
+        if (! $this->keyword()) {
+            return $next($query);
+        }
 
-        $query->where(function($query) {
-            $query->whereHas('user', function($user) {
+        $query->where(function ($query) {
+            $query->whereHas('user', function ($user) {
                 $user->where('id', $this->searchByUser);
             });
         });
 
-		return $next($query);
-	}
+        return $next($query);
+    }
 
-	/**
-	 * Get searchByUser keyword.
-	 *
-	 * @return mixed
-	 */
-	protected function keyword()
-	{
-		if ($this->searchByUser) {
-			return $this->searchByUser;
-	    }
+    /**
+     * Get searchByUser keyword.
+     *
+     * @return mixed
+     */
+    protected function keyword()
+    {
+        if ($this->searchByUser) {
+            return $this->searchByUser;
+        }
 
-		$this->searchByUser = request('user', null);
+        $this->searchByUser = request('user', null);
 
-		return request('user');
-	}
+        return request('user');
+    }
 }
