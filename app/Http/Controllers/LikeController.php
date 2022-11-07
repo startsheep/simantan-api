@@ -5,12 +5,16 @@ namespace App\Http\Controllers;
 use App\Http\Resources\Like\LikeCollection;
 use App\Http\Searches\LikeSearch;
 use App\Http\Services\Like\LikeService;
+use App\Http\Traits\ErrorFixer;
 use App\Models\Like;
+use Exception;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 
 class LikeController extends Controller
 {
+    use ErrorFixer;
+
     /**
      * @var
      */
@@ -45,11 +49,17 @@ class LikeController extends Controller
      */
     public function create(Request $request, $id)
     {
-        // $result = DB::transaction(function ($request, $id) {
-        return $this->likeService->update($id, $request->all());
-        // });
+        DB::beginTransaction();
 
-        // return $result;
+        try {
+            DB::commit();
+
+            return $this->likeService->update($id, $request->all());
+        } catch (Exception $e) {
+            DB::rollBack();
+
+            return $this->updateError();
+        }
     }
 
     /**
