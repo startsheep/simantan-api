@@ -15,13 +15,13 @@ class PostDetail extends JsonResource
     public function toArray($request)
     {
         $result = [
-            "id" => $this->id,
-            "image" => $this->image,
-            "description" => $this->description,
-            "flag" => $this->flag,
-            "user" => $this->user,
-            "created_at" => $this->created_at,
-            "updated_at" => $this->updated_at
+            'id' => $this->id,
+            'image' => $this->image,
+            'description' => $this->description,
+            'flag' => $this->flag,
+            'user' => $this->user,
+            'created_at' => $this->created_at,
+            'updated_at' => $this->updated_at,
         ];
 
         return $result;

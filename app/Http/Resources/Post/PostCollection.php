@@ -18,13 +18,13 @@ class PostCollection extends ResourceCollection
 
         foreach ($this as $post) {
             $result[] = [
-                "id" => $post->id,
-                "image" => $post->image,
-                "description" => $post->description,
-                "flag" => $post->flag,
-                "user" => $post->user,
-                "created_at" => $post->created_at,
-                "updated_at" => $post->updated_at
+                'id' => $post->id,
+                'image' => $post->image,
+                'description' => $post->description,
+                'flag' => $post->flag,
+                'user' => $post->user,
+                'created_at' => $post->created_at,
+                'updated_at' => $post->updated_at,
             ];
         }
 

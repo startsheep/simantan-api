@@ -29,7 +29,7 @@ class UpdatePostRequest extends FormRequest
         return [
             'image' => 'file|image|mimes:png,jpg,jpeg',
             'description' => 'required',
-            'flag_id' => 'exists:flags,id|required'
+            'flag_id' => 'exists:flags,id|required',
         ];
     }
 
@@ -45,8 +45,8 @@ class UpdatePostRequest extends FormRequest
         $response = new JsonResponse([
             'meta' => [
                 'messages' => $validator->errors(),
-                'status_code' => 400
-            ]
+                'status_code' => 400,
+            ],
         ], 400);
 
         throw new ValidationException($validator, $response);

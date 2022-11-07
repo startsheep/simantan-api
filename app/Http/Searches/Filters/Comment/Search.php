@@ -1,50 +1,51 @@
 <?php
+
 namespace App\Http\Searches\Filters\Comment;
 
+use App\Http\Searches\Contracts\FilterContract;
 use Closure;
 use Illuminate\Database\Eloquent\Builder;
-use App\Http\Searches\Contracts\FilterContract;
 
 class Search implements FilterContract
 {
-	/** @var string|null */
-	protected $search;
+    /** @var string|null */
+    protected $search;
 
-	/**
-	 * @param string|null $search
-	 * @return void
-	 */
-	public function __construct($search)
-	{
-		$this->search = $search;
-	}
+    /**
+     * @param  string|null  $search
+     * @return void
+     */
+    public function __construct($search)
+    {
+        $this->search = $search;
+    }
 
-	/**
-	 * @return mixed
-	 */
-	public function handle(Builder $query, Closure $next)
-	{
-		if (!$this->keyword()) {
-			return $next($query);
-		}
-		$query->where('message', 'LIKE', '%' . $this->search . '%');
+    /**
+     * @return mixed
+     */
+    public function handle(Builder $query, Closure $next)
+    {
+        if (! $this->keyword()) {
+            return $next($query);
+        }
+        $query->where('message', 'LIKE', '%'.$this->search.'%');
 
-		return $next($query);
-	}
+        return $next($query);
+    }
 
-	/**
-	 * Get search keyword.
-	 *
-	 * @return mixed
-	 */
-	protected function keyword()
-	{
-		if ($this->search) {
-			return $this->search;
-	    }
+    /**
+     * Get search keyword.
+     *
+     * @return mixed
+     */
+    protected function keyword()
+    {
+        if ($this->search) {
+            return $this->search;
+        }
 
-		$this->search = request('search', null);
+        $this->search = request('search', null);
 
-		return request('search');
-	}
+        return request('search');
+    }
 }

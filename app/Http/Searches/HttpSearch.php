@@ -3,12 +3,11 @@
 namespace App\Http\Searches;
 
 use App\Http\Abstracts\Form;
-use RuntimeException;
-use Illuminate\Http\Request;
-use Illuminate\Pipeline\Pipeline;
-use App\Http\Services\Traits\BaseFoundation;
 use App\Http\Traits\BaseFoundation as TraitsBaseFoundation;
 use Illuminate\Contracts\Container\Container as Laravel;
+use Illuminate\Http\Request;
+use Illuminate\Pipeline\Pipeline;
+use RuntimeException;
 
 abstract class HttpSearch extends Form
 {
@@ -32,9 +31,9 @@ abstract class HttpSearch extends Form
     /**
      * Undocumented function
      *
-     * @param  Pipeline $pipeline
+     * @param  Pipeline  $pipeline
      * @param  Laravel|null  $laravel
-     * @param  Request $request
+     * @param  Request  $request
      * @return void
      */
     public function __construct(Pipeline $pipeline, Request $request, Laravel $laravel = null)
@@ -52,14 +51,14 @@ abstract class HttpSearch extends Form
      */
     public function apply(...$params)
     {
-        if (!empty($params)) {
+        if (! empty($params)) {
             $this->parameters = $params['0'];
-        } elseif (!empty($this->request)) {
+        } elseif (! empty($this->request)) {
             $this->parameters = $this->request->all();
         }
 
-        if (!method_exists($this, 'passable')) {
-            throw new RuntimeException("passable method not exists.");
+        if (! method_exists($this, 'passable')) {
+            throw new RuntimeException('passable method not exists.');
         }
 
         $result = $this->pipeline->send($this->{'passable'}(...$params))
@@ -80,7 +79,7 @@ abstract class HttpSearch extends Form
      */
     protected function thenReturn($result)
     {
-        return;
+
     }
 
     protected function parsedFilters(): array
@@ -90,7 +89,7 @@ abstract class HttpSearch extends Form
                 return $filter;
             }
 
-            if (!class_exists($filter)) {
+            if (! class_exists($filter)) {
                 return $filter;
             }
 

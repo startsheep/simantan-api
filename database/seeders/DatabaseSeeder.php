@@ -22,13 +22,13 @@ class DatabaseSeeder extends Seeder
 
         foreach ($roles as $role) {
             Role::create([
-                'name' => $role
+                'name' => $role,
             ]);
         }
 
         User::factory()->create([
             'nip' => '11111',
-            'role_id' => 1
+            'role_id' => 1,
         ]);
     }
 }

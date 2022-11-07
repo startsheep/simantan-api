@@ -2,9 +2,9 @@
 
 namespace App\Http\Searches\Filters\Post;
 
+use App\Http\Searches\Contracts\FilterContract;
 use Closure;
 use Illuminate\Database\Eloquent\Builder;
-use App\Http\Searches\Contracts\FilterContract;
 
 class SearchByUser implements FilterContract
 {
@@ -12,7 +12,7 @@ class SearchByUser implements FilterContract
     protected $user;
 
     /**
-     * @param string|null $user
+     * @param  string|null  $user
      * @return void
      */
     public function __construct($user)
@@ -25,14 +25,14 @@ class SearchByUser implements FilterContract
      */
     public function handle(Builder $query, Closure $next)
     {
-        if (!$this->keyword()) {
+        if (! $this->keyword()) {
             return $next($query);
         }
 
         $query->where(function ($query) {
             $query->whereHas('user', function ($user) {
                 $user->where('id', $this->user)
-                    ->orWhere('name', 'like', '%' . $this->user . '%');
+                    ->orWhere('name', 'like', '%'.$this->user.'%');
             });
         });
 

@@ -4,7 +4,6 @@ namespace App\Http\Controllers\Auth;
 
 use App\Http\Controllers\Controller;
 use App\Http\Services\User\UserService;
-use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
 class LogoutController extends Controller
@@ -23,7 +22,7 @@ class LogoutController extends Controller
         $user->tokens()->where('id', $user->currentAccessToken()->id)->delete();
 
         return response([
-            'message' => 'logout success'
+            'message' => 'logout success',
         ]);
     }
 }

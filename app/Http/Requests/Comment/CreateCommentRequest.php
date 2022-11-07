@@ -29,7 +29,7 @@ class CreateCommentRequest extends FormRequest
         return [
             'user_id' => 'exists:users,id|required',
             'post_id' => 'exists:posts,id|required',
-            'message' => 'required'
+            'message' => 'required',
         ];
     }
 
@@ -45,8 +45,8 @@ class CreateCommentRequest extends FormRequest
         $response = new JsonResponse([
             'meta' => [
                 'messages' => $validator->errors(),
-                'status_code' => 400
-            ]
+                'status_code' => 400,
+            ],
         ], 400);
 
         throw new ValidationException($validator, $response);

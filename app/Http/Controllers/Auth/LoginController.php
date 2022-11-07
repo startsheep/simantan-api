@@ -5,9 +5,7 @@ namespace App\Http\Controllers\Auth;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Auth\LoginRequest;
 use App\Http\Services\User\UserService;
-use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
-use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Hash;
 
 class LoginController extends Controller
@@ -23,15 +21,15 @@ class LoginController extends Controller
     {
         $user = $this->userService->whereNip($request->nip);
 
-        if (!$user) {
+        if (! $user) {
             return response()->json([
-                'message' => 'nip or password wrong!'
+                'message' => 'nip or password wrong!',
             ], 400);
         }
 
-        if (!Hash::check($request->password, $user->password)) {
+        if (! Hash::check($request->password, $user->password)) {
             return response()->json([
-                'message' => 'nip or password wrong!'
+                'message' => 'nip or password wrong!',
             ], 400);
         }
 
@@ -50,8 +48,8 @@ class LoginController extends Controller
                     'nip' => $user->nip,
                     'image' => $user->image,
                 ],
-                'token' => $token->plainTextToken
-            ]
+                'token' => $token->plainTextToken,
+            ],
         ]);
     }
 }

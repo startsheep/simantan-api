@@ -9,7 +9,6 @@ use App\Http\Resources\Post\PostDetail;
 use App\Http\Searches\PostSearch;
 use App\Http\Services\Post\PostService;
 use App\Http\Traits\ErrorFixer;
-use App\Models\Post;
 use Exception;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
@@ -19,12 +18,12 @@ class PostController extends Controller
     use ErrorFixer;
 
     /**
-     * @var $postService
+     * @var
      */
     protected $postService;
 
     /**
-     * @param PostService $postService
+     * @param  PostService  $postService
      */
     public function __construct(PostService $postService)
     {
@@ -56,9 +55,11 @@ class PostController extends Controller
 
         try {
             DB::commit();
+
             return $this->postService->create($request->all());
         } catch (Exception $e) {
             DB::rollBack();
+
             return $this->createError();
         }
     }
@@ -89,9 +90,11 @@ class PostController extends Controller
 
         try {
             DB::commit();
+
             return $this->postService->update($id, $request->all());
         } catch (Exception $e) {
             DB::rollBack();
+
             return $this->updateError();
         }
     }

@@ -14,12 +14,12 @@ class Post extends Model
         'image',
         'description',
         'flag_id',
-        'user_id'
+        'user_id',
     ];
 
     public function getImageAttribute($image)
     {
-        return $this->attributes['image'] = url('storage/' . $image);
+        return $this->attributes['image'] = url('storage/'.$image);
     }
 
     public function user(): BelongsTo

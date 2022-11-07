@@ -7,19 +7,18 @@ use App\Http\Resources\Flag\FlagCollection;
 use App\Http\Resources\Flag\FlagDetail;
 use App\Http\Searches\FlagSearch;
 use App\Http\Services\Flag\FlagService;
-use App\Models\Flag;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 
 class FlagController extends Controller
 {
     /**
-     * @var $flagService
+     * @var
      */
     protected $flagService;
 
     /**
-     * @param FlagService $flagService
+     * @param  FlagService  $flagService
      */
     public function __construct(FlagService $flagService)
     {
@@ -52,13 +51,15 @@ class FlagController extends Controller
         try {
             $this->flagService->create($request->all());
             DB::commit();
+
             return response()->json([
                 'message' => 'success',
             ], 200);
         } catch (\Exception $exception) {
             DB::rollback();
+
             return response()->json([
-                'message' => 'Fail, data failed to create'
+                'message' => 'Fail, data failed to create',
             ], 500);
         }
     }
@@ -90,13 +91,15 @@ class FlagController extends Controller
         try {
             $this->flagService->update($id, $request->all());
             DB::commit();
+
             return response()->json([
                 'message' => 'success',
             ], 200);
         } catch (\Exception $exception) {
             DB::rollback();
+
             return response()->json([
-                'message' => 'Fail, data failed to delete'
+                'message' => 'Fail, data failed to delete',
             ], 500);
         }
     }
@@ -114,13 +117,15 @@ class FlagController extends Controller
         try {
             $this->flagService->delete($id);
             DB::commit();
+
             return response()->json([
                 'message' => 'success',
             ], 200);
         } catch (\Exception $exception) {
             DB::rollback();
+
             return response()->json([
-                'message' => 'Fail, data failed to delete'
+                'message' => 'Fail, data failed to delete',
             ], 500);
         }
     }

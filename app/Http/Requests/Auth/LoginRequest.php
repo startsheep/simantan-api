@@ -28,7 +28,7 @@ class LoginRequest extends FormRequest
     {
         return [
             'nip' => 'required',
-            'password' => 'required'
+            'password' => 'required',
         ];
     }
 
@@ -44,8 +44,8 @@ class LoginRequest extends FormRequest
         $response = new JsonResponse([
             'meta' => [
                 'messages' => $validator->errors(),
-                'status_code' => 400
-            ]
+                'status_code' => 400,
+            ],
         ], 400);
 
         throw new ValidationException($validator, $response);
