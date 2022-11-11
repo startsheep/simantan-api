@@ -109,4 +109,11 @@ class CommentController extends Controller
     {
         return $this->commentService->delete($id);
     }
+
+    public function commentCount($id)
+    {
+        $result = $this->commentService->commentCount($id);
+
+        return $result;
+    }
 }

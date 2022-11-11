@@ -55,4 +55,15 @@ class CommentServiceImplement extends Service implements CommentService
             'data' => $comment,
         ], Response::HTTP_OK);
     }
+
+    public function commentCount($id)
+    {
+        $commentCount = $this->mainRepository->commentCount($id);
+
+        return response()->json([
+            'message' => 'Success!',
+            'status' => 'success',
+            'data' => $commentCount,
+        ], Response::HTTP_OK);
+    }
 }

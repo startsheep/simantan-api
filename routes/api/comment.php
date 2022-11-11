@@ -9,6 +9,7 @@ Route::middleware(['auth:sanctum'])->group(function () {
         Route::post('/', [CommentController::class, 'store'])->name('api.comment.store');
         Route::get('/{id}', [CommentController::class, 'show'])->name('api.comment.show');
         Route::put('/{id}', [CommentController::class, 'update'])->name('api.comment.update');
+        Route::get('/count/{id}', [CommentController::class, 'commentCount'])->name('api.comment.count');
         Route::delete('/{id}', [CommentController::class, 'delete'])->name('api.comment.delete');
     });
 });
