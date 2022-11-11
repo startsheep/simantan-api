@@ -9,6 +9,8 @@ Route::middleware(['auth:sanctum'])->group(function () {
         Route::post('/', [PostController::class, 'store'])->name('api.post.store');
         Route::get('/{id}', [PostController::class, 'show'])->name('api.post.show');
         Route::put('/{id}', [PostController::class, 'update'])->name('api.post.update');
+        Route::post('like/{id}', [PostController::class, 'like'])->name('api.post.like');
         Route::delete('/{id}', [PostController::class, 'delete'])->name('api.post.delete');
+        Route::get('like/count/{id}', [PostController::class, 'likeCount'])->name('api.post.like.count');
     });
 });

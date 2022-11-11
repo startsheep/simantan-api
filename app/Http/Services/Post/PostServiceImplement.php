@@ -80,4 +80,26 @@ class PostServiceImplement extends Service implements PostService
             'data' => $post,
         ], Response::HTTP_OK);
     }
+
+    public function updateLike($id, $attributes)
+    {
+        $like = $this->mainRepository->updateLike($id);
+
+        return response()->json([
+            'message' => 'like has updated!',
+            'status' => 'success',
+            'data' => $like,
+        ], Response::HTTP_OK);
+    }
+
+    public function countLike($id)
+    {
+        $countLike = $this->mainRepository->countLike($id);
+
+        return response()->json([
+            'message' => 'Success!',
+            'status' => 'success',
+            'data' => $countLike,
+        ], Response::HTTP_OK);
+    }
 }

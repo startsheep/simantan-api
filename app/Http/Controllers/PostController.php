@@ -109,4 +109,26 @@ class PostController extends Controller
     {
         return $this->postService->delete($id);
     }
+
+    public function like(Request $request, $id)
+    {
+        DB::beginTransaction();
+
+        try {
+            DB::commit();
+
+            return $this->postService->updateLike($id, $request->all());
+        } catch (Exception $e) {
+            DB::rollBack();
+
+            return $this->updateError();
+        }
+    }
+
+    public function likeCount($id)
+    {
+        $result = $this->postService->countLike($id);
+
+        return $result;
+    }
 }
