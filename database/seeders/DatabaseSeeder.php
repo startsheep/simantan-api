@@ -30,5 +30,10 @@ class DatabaseSeeder extends Seeder
             'nip' => '11111',
             'role_id' => 1,
         ]);
+
+        User::factory()->create([
+            'nip' => '22222',
+            'role_id' => 2,
+        ]);
     }
 }
