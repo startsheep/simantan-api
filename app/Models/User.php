@@ -12,6 +12,10 @@ class User extends Authenticatable
 {
     use HasApiTokens, HasFactory, Notifiable;
 
+    const ACTIVE = 1;
+
+    const NO_ACTIVE = 0;
+
     /**
      * The attributes that are mass assignable.
      *
@@ -20,6 +24,7 @@ class User extends Authenticatable
     protected $fillable = [
         'name',
         'nip',
+        'image',
         'password',
         'role_id',
         'active',
@@ -43,6 +48,20 @@ class User extends Authenticatable
     protected $casts = [
         'email_verified_at' => 'datetime',
     ];
+
+    public function setPasswordAttribute($password)
+    {
+        return $this->attributes['password'] = bcrypt($password);
+    }
+
+    public function getImageAttribute($image)
+    {
+        if (strstr($image, 'http')) {
+            return $this->attributes['image'] = $image;
+        }
+
+        return $this->attributes['image'] = url('storage/' . $image);
+    }
 
     public function role()
     {
