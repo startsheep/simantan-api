@@ -38,7 +38,7 @@ class CommentController extends Controller
     public function index(Request $request)
     {
         $factory = app()->make(CommentSearch::class);
-        $comments = $factory->apply()->paginate($request->per_page);
+        $comments = $factory->apply()->orderBy('id', 'desc')->get();
 
         return new CommentCollection($comments);
     }
