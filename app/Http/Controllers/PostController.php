@@ -38,7 +38,7 @@ class PostController extends Controller
     public function index(Request $request)
     {
         $factory = app()->make(PostSearch::class);
-        $posts = $factory->apply()->paginate($request->per_page);
+        $posts = $factory->apply()->orderBy('id', 'desc')->paginate($request->per_page);
 
         return new PostCollection($posts);
     }
