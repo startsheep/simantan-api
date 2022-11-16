@@ -8,6 +8,7 @@ use App\Http\Resources\Post\PostCollection;
 use App\Http\Resources\Post\PostDetail;
 use App\Http\Searches\PostSearch;
 use App\Http\Services\Post\PostService;
+use App\Http\Services\SavePost\SavePostService;
 use App\Http\Traits\ErrorFixer;
 use Exception;
 use Illuminate\Http\Request;
@@ -23,11 +24,18 @@ class PostController extends Controller
     protected $postService;
 
     /**
-     * @param  PostService  $postService
+     * @var
      */
-    public function __construct(PostService $postService)
+    protected $savePostService;
+
+    /**
+     * @param  PostService  $postService
+     * @param  SavePostService  $savePostService
+     */
+    public function __construct(PostService $postService, SavePostService $savePostService)
     {
         $this->postService = $postService;
+        $this->savePostService = $savePostService;
     }
 
     /**
@@ -130,5 +138,21 @@ class PostController extends Controller
         $result = $this->postService->countLike($id);
 
         return $result;
+    }
+
+    public function save($id)
+    {
+        dd($id);
+        DB::beginTransaction();
+
+        try {
+            DB::commit();
+
+            return $this->savePostService->save($id);
+        } catch (Exception $e) {
+            DB::rollBack();
+
+            return $this->createError();
+        }
     }
 }
