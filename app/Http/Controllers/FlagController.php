@@ -33,7 +33,12 @@ class FlagController extends Controller
     public function index(Request $request)
     {
         $factory = app()->make(FlagSearch::class);
-        $flags = $factory->apply()->paginate($request->per_page);
+
+        if ($request->per_page) {
+            $flags = $factory->apply()->paginate($request->per_page);
+        } else {
+            $flags = $factory->apply()->get();
+        }
 
         return new FlagCollection($flags);
     }

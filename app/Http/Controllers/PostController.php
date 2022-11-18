@@ -8,6 +8,7 @@ use App\Http\Resources\Post\PostCollection;
 use App\Http\Resources\Post\PostDetail;
 use App\Http\Searches\PostSearch;
 use App\Http\Services\Post\PostService;
+use App\Http\Services\SavePost\SavePostService;
 use App\Http\Traits\ErrorFixer;
 use Exception;
 use Illuminate\Http\Request;
@@ -23,11 +24,18 @@ class PostController extends Controller
     protected $postService;
 
     /**
-     * @param  PostService  $postService
+     * @var
      */
-    public function __construct(PostService $postService)
+    protected $savePostService;
+
+    /**
+     * @param  PostService  $postService
+     * @param  SavePostService  $savePostService
+     */
+    public function __construct(PostService $postService, SavePostService $savePostService)
     {
         $this->postService = $postService;
+        $this->savePostService = $savePostService;
     }
 
     /**
@@ -38,7 +46,7 @@ class PostController extends Controller
     public function index(Request $request)
     {
         $factory = app()->make(PostSearch::class);
-        $posts = $factory->apply()->paginate($request->per_page);
+        $posts = $factory->apply()->orderBy('id', 'desc')->paginate($request->per_page);
 
         return new PostCollection($posts);
     }
@@ -108,5 +116,42 @@ class PostController extends Controller
     public function delete($id)
     {
         return $this->postService->delete($id);
+    }
+
+    public function like(Request $request, $id)
+    {
+        DB::beginTransaction();
+
+        try {
+            DB::commit();
+
+            return $this->postService->updateLike($id, $request->all());
+        } catch (Exception $e) {
+            DB::rollBack();
+
+            return $this->updateError();
+        }
+    }
+
+    public function likeCount($id)
+    {
+        $result = $this->postService->countLike($id);
+
+        return $result;
+    }
+
+    public function save($id)
+    {
+        DB::beginTransaction();
+
+        try {
+            DB::commit();
+
+            return $this->savePostService->save($id);
+        } catch (Exception $e) {
+            DB::rollBack();
+
+            return $this->createError();
+        }
     }
 }

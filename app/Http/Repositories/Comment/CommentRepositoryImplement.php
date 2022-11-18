@@ -3,6 +3,7 @@
 namespace App\Http\Repositories\Comment;
 
 use App\Models\Comment;
+use Illuminate\Http\Response;
 use LaravelEasyRepository\Implementations\Eloquent;
 
 class CommentRepositoryImplement extends Eloquent implements CommentRepository
@@ -20,5 +21,10 @@ class CommentRepositoryImplement extends Eloquent implements CommentRepository
         $this->model = $model;
     }
 
-    // Write something awesome :)
+    public function commentCount($id)
+    {
+        $countLike = $this->model->where('id', $id)->get()->count();
+
+        return $countLike;
+    }
 }
