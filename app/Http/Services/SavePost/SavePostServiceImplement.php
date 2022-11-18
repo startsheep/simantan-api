@@ -32,15 +32,26 @@ class SavePostServiceImplement extends Service implements SavePostService
             ], 400);
         }
 
-        $savePost = parent::create([
+        $savePost = $this->mainRepository->findByCriteria([
             'post_id' => $post->id,
             'user_id' => auth()->user()->id
         ]);
 
+        if ($savePost) {
+            $savePost->delete();
+            $message = 'post has removed from stash!';
+        } else {
+            $savePost = parent::create([
+                'post_id' => $post->id,
+                'user_id' => auth()->user()->id
+            ]);
+            $message = 'post has saved!';
+        }
+
         return response()->json([
-            'message' => 'post has saved!',
+            'message' => $message,
             'status' => 'success',
             'data' => $savePost,
-        ], Response::HTTP_CREATED);
+        ], Response::HTTP_OK);
     }
 }

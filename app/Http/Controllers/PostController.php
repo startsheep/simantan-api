@@ -142,7 +142,6 @@ class PostController extends Controller
 
     public function save($id)
     {
-        dd($id);
         DB::beginTransaction();
 
         try {

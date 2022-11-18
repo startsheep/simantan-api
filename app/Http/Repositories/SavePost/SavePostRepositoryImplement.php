@@ -20,5 +20,8 @@ class SavePostRepositoryImplement extends Eloquent implements SavePostRepository
         $this->model = $model;
     }
 
-    // Write something awesome :)
+    public function findByCriteria(array $criteria)
+    {
+        return $this->model->where($criteria)->first();
+    }
 }
