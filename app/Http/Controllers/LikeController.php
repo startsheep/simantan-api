@@ -74,4 +74,11 @@ class LikeController extends Controller
 
         return $result;
     }
+
+    public function status($id)
+    {
+        $result = $this->likeService->status($id);
+
+        return $result;
+    }
 }
