@@ -6,4 +6,5 @@ use LaravelEasyRepository\BaseService;
 
 interface LikeService extends BaseService
 {
+    public function status($id);
 }
