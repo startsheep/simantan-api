@@ -23,6 +23,8 @@ class PostCollection extends ResourceCollection
                 'description' => $post->description,
                 'flag' => $post->flag,
                 'user' => $post->user,
+                'countLike' => $post->likes->count(),
+                'countComment' => $post->comments->count(),
                 'created_at' => $post->created_at,
                 'updated_at' => $post->updated_at,
             ];

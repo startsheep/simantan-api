@@ -6,6 +6,5 @@ use LaravelEasyRepository\Repository;
 
 interface SavePostRepository extends Repository
 {
-
-    // Write something awesome :)
+    public function findByCriteria(array $criteria);
 }
