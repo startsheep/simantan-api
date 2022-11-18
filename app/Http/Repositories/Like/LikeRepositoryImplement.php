@@ -43,4 +43,9 @@ class LikeRepositoryImplement extends Eloquent implements LikeRepository
 
         return $likes;
     }
+
+    public function findByCriteria(array $criteria)
+    {
+        return $this->model->where($criteria)->first();
+    }
 }

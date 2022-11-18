@@ -41,4 +41,24 @@ class LikeServiceImplement extends Service implements LikeService
             'data' => $likeCount,
         ], Response::HTTP_OK);
     }
+
+    public function status($id)
+    {
+        $like = $this->mainRepository->findByCriteria([
+            'post_id' => $id,
+            'user_id' => auth()->user()->id
+        ]);
+
+        if ($like) {
+            $result = true;
+        } else {
+            $result = false;
+        }
+
+        return response()->json([
+            'message' => 'Success!',
+            'status' => 'success',
+            'data' => $result,
+        ], Response::HTTP_OK);
+    }
 }

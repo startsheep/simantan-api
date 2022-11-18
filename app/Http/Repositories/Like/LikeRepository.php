@@ -8,4 +8,5 @@ interface LikeRepository extends Repository
 {
     public function updateLike($id);
     public function likeCount($id);
+    public function findByCriteria(array $criteria);
 }
