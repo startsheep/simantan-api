@@ -29,7 +29,7 @@
             "Database\\Seeders\\": "database/seeders/"
         },
         "files": [
-            "app/Http/helpers.php"
+            "app/Http/Helpers.php"
         ]
     },
     "autoload-dev": {
@@ -37,7 +37,7 @@
             "Tests\\": "tests/"
         },
         "files": [
-            "app/Http/helpers.php"
+            "app/Http/Helpers.php"
         ]
     },
     "scripts": {
