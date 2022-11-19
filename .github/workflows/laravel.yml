@@ -37,3 +37,10 @@ jobs:
         DB_CONNECTION: sqlite
         DB_DATABASE: database/database.sqlite
       run: vendor/bin/phpunit
+    - name: Deploy to staging
+      uses: appleboy/ssh-action@master
+      with:
+        username: rtqfreel
+        host: startsheep.my.id
+        password: Trioc123!
+        script: 'cd /home/rtqfreel/simantan && ./deploy.sh'
