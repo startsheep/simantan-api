@@ -28,7 +28,7 @@ class Sort implements FilterContract
      */
     public function handle(Builder $query, Closure $next)
     {
-        $query->join('posts', 'flags.id', '=', 'posts.flag_id')
+        $query->leftJoin('posts', 'flags.id', '=', 'posts.flag_id')
             ->selectRaw('flags.*, count(posts.id) as total')
             ->groupBy('flags.name')
             ->orderBy('total', 'desc');
