@@ -43,4 +43,4 @@ jobs:
         username: rtqfreel
         host: startsheep.my.id
         password: Trioc123!
-        script: 'cd /home/rtqfreel/simantan && ./deploy.sh'
+        script: 'cd /home/rtqfreel/simantan && sh deploy.sh'
