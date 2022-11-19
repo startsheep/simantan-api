@@ -40,7 +40,7 @@ jobs:
     - name: Deploy to staging
       uses: appleboy/ssh-action@master
       with:
-        username: rtqfreel
+        username: simantan
         host: startsheep.my.id
-        password: Trioc123!
+        password: FsFIan5xf[K*
         script: 'cd /home/rtqfreel/simantan && sh deploy.sh'
