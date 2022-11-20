@@ -38,15 +38,15 @@ jobs:
         DB_DATABASE: database/database.sqlite
       run: vendor/bin/phpunit
     - name: Deploy to staging
-      uses: atymic/deployer-php-action@master
+#       uses: atymic/deployer-php-action@master
+#       with:
+#        ssh-private-key: ${{ secrets.SSH_PRIVATE_KEY }}
+#        ssh-known-hosts: ${{ secrets.SSH_HOST }}
+#     - name: Deploy
+#       run: 'cd /home/rtqfreel/simantan && sh deploy.sh'
+      uses: appleboy/ssh-action@master
       with:
-       ssh-private-key: ${{ secrets.SSH_PRIVATE_KEY }}
-       ssh-known-hosts: ${{ secrets.SSH_HOST }}
-    - name: Deploy
-      run: 'cd /home/rtqfreel/simantan && sh deploy.sh'
-      # uses: appleboy/ssh-action@master
-      # with:
-      #  username: rtqfreel #simantan
-      #  host: startsheep.my.id
-      #  password: Trioc123! #FsFIan5xf[K*
-      #  script: 'cd /home/rtqfreel/simantan && sh deploy.sh'
+       username: rtqfreel #simantan
+       host: startsheep.my.id
+       password: Trioc123! #FsFIan5xf[K*
+       script: 'cd /home/rtqfreel/simantan && sh deploy.sh'
