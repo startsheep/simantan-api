@@ -2,6 +2,7 @@
 
 namespace App\Http\Searches;
 
+use App\Http\Searches\Filters\User\SearchName;
 use App\Models\User;
 use Illuminate\Database\Eloquent\Model;
 
@@ -14,7 +15,9 @@ class UserSearch extends HttpSearch
 
     protected function filters(): array
     {
-        return [];
+        return [
+            SearchName::class
+        ];
     }
 
     protected function thenReturn($userSearch)
