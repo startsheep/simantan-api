@@ -132,4 +132,14 @@ class UserController extends Controller
     {
         return $this->userService->delete($id);
     }
+
+    public function countPost($id)
+    {
+        return $this->userService->countPost($id);
+    }
+
+    public function countLike($id)
+    {
+        return $this->userService->countLike($id);
+    }
 }

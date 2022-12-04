@@ -11,5 +11,7 @@ Route::middleware(['auth:sanctum'])->group(function () {
         Route::put('/{id}', [UserController::class, 'update'])->name('api.user.update');
         Route::put('/change-password/{id}', [UserController::class, 'changePassword'])->name('api.user.change.password');
         Route::delete('/{id}', [UserController::class, 'delete'])->name('api.user.delete');
+        Route::get('/count-post/{id}', [UserController::class, 'countPost'])->name('api.user.count.post');
+        Route::get('/count-like/{id}', [UserController::class, 'countLike'])->name('api.user.count.like');
     });
 });

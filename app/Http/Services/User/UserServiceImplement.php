@@ -109,4 +109,26 @@ class UserServiceImplement extends Service implements UserService
             'data' => $user,
         ], Response::HTTP_OK);
     }
+
+    public function countPost($id)
+    {
+        $countPost = $this->mainRepository->countPost($id);
+
+        return response()->json([
+            'message' => 'Success!',
+            'status' => 'success',
+            'data' => $countPost,
+        ], Response::HTTP_OK);
+    }
+
+    public function countLike($id)
+    {
+        $countLike = $this->mainRepository->countLike($id);
+
+        return response()->json([
+            'message' => 'Success!',
+            'status' => 'success',
+            'data' => $countLike,
+        ], Response::HTTP_OK);
+    }
 }
